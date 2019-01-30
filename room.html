@@ -11,71 +11,29 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-<div id="app">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3 col_edit">
-                <h1>飯店資料</h1>
-                <hr/>
-                <label>折價</label>
-                <input class="form-control" v-model="discount" />
-                <label>服務費</label>
-                <input class="form-control" v-model="service_fee" /><br/>
-                <h1>房間編輯{{edit_id}}</h1>
-                <select class="form-control" v-model="edit_id">
-          <option v-for="(r,id) in rooms" :value="id">{{r.name}}</option>
-        </select>
-                <button class="btn btn-secondary room_edit" @click="addroom">+ 新增房間</button>
-                <hr/>
-                <div class="room_edit" v-for="(room,id) in [rooms[edit_id]]" v-if="room">
-                    <h4>{{room.name}}</h4>
-                    <label>房間名稱<i class="fa fa-trash cursor_pointer" @click="delete_room(edit_id)"></i></label>
-                    <input class="form-control" v-model="room.name" />
-                    <label>價錢</label>
-                    <input class="form-control" v-model="room.price" />
-                    <label>折價</label>
-                    <input class="form-control" v-model="room.discount" />
-                    <label>英文</label>
-                    <input class="form-control" v-model="room.eng" />
-                    <label>圖片網址</label>
-                    <input class="form-control" v-model="room.cover" />
-                    <label>房間設備</label>
-                    <label>早餐
-            <input class="form-control" type="checkbox" v-model="room.equipment.wifi"/>
-          </label>
-                    <label>wifi
-            <input class="form-control" type="checkbox" v-model="room.equipment.bathtub"/>
-          </label>
-                    <label>浴缸
-            <input class="form-control" type="checkbox" v-model="room.equipment.breakfast"/>
-          </label>
-                </div>
-            </div>
-            <div class="col-sm-9 col_rooms">
-                <h1>房間列表</h1>
-                <hr/>
-                <div class="row">
-                    <div class="col-sm-4 col_room" v-for="(room,id) in rooms" v-if="room">
-                        <room :room_data="room" :hotel_discount="discount" :hotel_fee="service_fee" :delete_room="delete_room" :id="id"></room>
-=======
     <div id="app">
         <div class="container-fluid">
-            <!-- sqdwqewqewq -->
+            <!-- Containers: 容器提供對你的網站內容定新的方式。對於固定寬度使用 .container，對於滿版寬度使用 .container-fluid。 -->
             <div class="row">
+                <!-- Rows: 行是欄的水平群組，它確保你的欄正確的排成一行。 -->
+                <!-- Bootstrap's grid system allows up to 12 columns across the page. -->
                 <div class="col-sm-3 col_edit">
                     <h1>飯店資料</h1>
                     <hr />
                     <label>折價</label>
+                    <!-- Bootstrap為表單設置了.form-control類別，當input、select、textarea等元素，使用了.form-control，將會出現BS設計好的樣式。 -->
                     <input class="form-control" v-model="discount" />
                     <label>服務費</label>
                     <input class="form-control" v-model="service_fee" /><br />
                     <h1>房間編輯{{edit_id}}</h1>
                     <select class="form-control" v-model="edit_id">
-                        <option v-for="(r,id) in rooms" :value="id">{{r.name}}</option>
+                        <!-- 綁定option value-->
+                        <option v-for="(r,id) in rooms" v-bind:value="id">{{r.name}}</option>
                     </select>
+                    <!-- 可以用 v-on 指令監聽 DOM 事件，並在觸發時執行一些 JavaScript 代碼。 -->
                     <button class="btn btn-secondary room_edit" @click="addroom">+ 新增房間</button>
                     <hr />
+                    <!-- v-if="room":只有room存在的時候才顯示修改表單 ，避免新增房間後 就不能刪除-->
                     <div class="room_edit" v-for="(room,id) in [rooms[edit_id]]" v-if="room">
                         <h4>{{room.name}}</h4>
                         <label>房間名稱<i class="fa fa-trash cursor_pointer" @click="delete_room(edit_id)"></i></label>
@@ -89,13 +47,13 @@
                         <label>圖片網址</label>
                         <input class="form-control" v-model="room.cover" />
                         <label>房間設備</label>
-                        <label>早餐
+                        <label>WIFI
                             <input class="form-control" type="checkbox" v-model="room.equipment.wifi" />
                         </label>
-                        <label>wifi
+                        <label>浴缸
                             <input class="form-control" type="checkbox" v-model="room.equipment.bathtub" />
                         </label>
-                        <label>浴缸
+                        <label>早餐
                             <input class="form-control" type="checkbox" v-model="room.equipment.breakfast" />
                         </label>
                     </div>
@@ -108,35 +66,11 @@
                             <room :room_data="room" :hotel_discount="discount" :hotel_fee="service_fee" :delete_room="delete_room"
                                 :id="id"></room>
                         </div>
->>>>>>> commit
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-</div>
-<template id="room">
-    <div class="room_container">
-        <div class="cover" v-bind:style="bg_css">
-            <h3>{{room_data.name}}</h3><i class="fa fa-times" @click="delete_room(id)"></i>
-        </div>
-        <div class="info">
-            <h5>{{room_data.eng}}
-                <div class="icons"><span v-if="room_data.equipment.breakfast"><i class="fa fa-coffee"></i></span><span v-if="room_data.equipment.bathtub"><i class="fa fa-bath"></i></span>
-                    <span
-                        v-if="room_data.equipment.wifi"><i class="fa fa-wifi"></i></span>
-                </div>
-            </h5>
-            <h5>{{room_data.discount}}*{{hotel_discount}}={{ final_discount_show }}折</h5>
-            <h4>TWD
-                <s>{{room_data.price}}</s>
-                <div class="final_price">{{final_price}}</div>
-            </h4>
-        </div>
-    </div>
-</template>
-=======
     <template id="room">
         <div class="room_container">
             <div class="cover" v-bind:style="bg_css">
@@ -157,7 +91,6 @@
             </div>
         </div>
     </template>
->>>>>>> commit
     <script language=JavaScript src="room.js"></script>
 </body>
 
