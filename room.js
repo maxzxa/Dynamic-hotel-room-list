@@ -1,5 +1,4 @@
-var rooms = [
-    {
+var myrooms = [{
         "name": "經濟雙人房",
         "eng": "Economy Double Room",
         "price": 7000,
@@ -112,7 +111,8 @@ Vue.component("room", {
         final_discount: function () {
             return this.room_data.discount * this.hotel_discount;
 
-        }, final_discount_show: function () {
+        },
+        final_discount_show: function () {
             return parseInt(this.final_discount * 100);
         },
         final_price: function () {
@@ -129,11 +129,12 @@ Vue.component("room", {
 var vm = new Vue({
     el: "#app",
     data: {
-        rooms: rooms,
+        rooms: myrooms,
         service_fee: 200,
         discount: 0.9,
         edit_id: 0
-    }, methods: {
+    },
+    methods: {
         addroom: function () {
             this.rooms.push({
                 "name": "新房間",
