@@ -32,6 +32,7 @@
                     </select>
                     <button class="btn btn-secondary room_edit" @click="addroom">+ 新增房間</button>
                     <hr />
+                    <!-- 只有room存在的時候才顯示修改表單 -->
                     <div class="room_edit" v-for="(room,id) in [rooms[edit_id]]" v-if="room">
                         <h4>{{room.name}}</h4>
                         <label>房間名稱<i class="fa fa-trash cursor_pointer" @click="delete_room(edit_id)"></i></label>
